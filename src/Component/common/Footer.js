@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent  } from 'react';
 import { Tool } from '../../Tool';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import action from '../../Action/Index';
+import { Link, IndexLink } from 'react-router';
 
 /**
  * 底部导航菜单
  *
- * @export
- * @class Footer
- * @extends {Component}
+ * 更改记录
+ * 1. 修改高亮的方式，使用Link和IndexLink来简化
+ * 2. 试用了PureComponent, 去掉了shouldComponentUpdate
+ * 3. 去掉了connect里的action('User')，没有用处
  */
-class FooterInit extends Component {
+class Footer extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -19,64 +20,65 @@ class FooterInit extends Component {
         this.state = {
             messageCount: 0
         };
+    }
 
-        this.getMessageCount = () => {
-            var accesstoken = this.props.User ? this.props.User.accesstoken : '';
-            if (accesstoken) {
-                Tool.get('/api/v1/message/count', { accesstoken }, (res) => {
-                    this.setState({
-                        messageCount: res.data
-                    });
+    /**
+     * 获取用户消息数据，只有用户登录后有accesstoken才发送该请求
+     * todo: 每次切换底部tab都要发送请求（登录后），这不是很合理需要优化
+     * 优化：看能不能将Footer组件变成函数式组件，这样就能共享一个实例(函数式组件不能有state, 这个要考虑)
+     */
+    getMessageCount() {
+        let accesstoken = this.props.User ? this.props.User.accesstoken : '';
+        if (accesstoken) {
+            Tool.get('/api/v1/message/count', {accesstoken}, (res) => {
+                this.setState({
+                    messageCount: res.data
                 });
-            }
+            });
         }
     }
 
     componentDidMount() {
         this.getMessageCount();
     }
-    shouldComponentUpdate(np, ns) {
-        return this.props.index !== np.index || this.state.messageCount !== ns.messageCount; //防止组件不必要的更新
-    }
 
     render() {
-        var myUrl = this.props.User && this.props.User.loginname ? '/user/' + this.props.User.loginname : '/signin';
-        var arr = [];
-        arr[this.props.index] = 'on';
+        let myUrl = this.props.User && this.props.User.loginname ? '/user/' + this.props.User.loginname : '/signin';
         return (
             <footer className="common-footer">
                 <div className="zhanwei"></div>
                 <ul className="menu" data-flex="box:mean">
-                    <li className={arr[0]}>
-                        <Link to="/">
-                            <i className="iconfont icon-shouye"></i>首页
-                        </Link>
-                    </li>
-                    <li className={arr[1]}>
-                        <Link to="/topic/create">
-                            <i className="iconfont icon-fabu"></i>发表
-                        </Link>
-                    </li>
-                    <li className={arr[2]}>
-                        <Link to="/my/messages">
-                            <i className="iconfont icon-xiaoxi"></i>消息{this.state.messageCount > 0 ? <em>{this.state.messageCount}</em> : ''}
-                        </Link>
-                    </li>
-                    <li className={arr[3]}>
-                        <Link to={myUrl}>
-                            <i className="iconfont icon-wode"></i>我的
-                        </Link>
-                    </li>
+                    <IndexLink to="/" activeClassName="on">
+                        <i className="iconfont icon-shouye"></i>首页
+                    </IndexLink>
+                    <Link to="/topic/create" activeClassName="on">
+                        <i className="iconfont icon-fabu"></i>发表
+                    </Link>
+
+                    <Link to="/my/messages" activeClassName="on">
+                        <i className="iconfont icon-xiaoxi"></i>消息{this.state.messageCount > 0 ? <em>{this.state.messageCount}</em> : ''}
+                    </Link>
+                    <Link to={myUrl} activeClassName="on">
+                        <i className="iconfont icon-wode"></i>我的
+                    </Link>
                 </ul>
             </footer>
         );
     }
 }
 
-FooterInit.defaultProps = {
-    index: 0
-};
+const mapStateToProps = state => ({
+    User: state.User
+});
 
-var Footer = connect((state) => { return { User: state.User }; }, action('User'))(FooterInit);
 
-export default Footer ;
+export default connect(mapStateToProps)(Footer);
+
+
+/**
+ 用了PureComponent，去掉了下面这段
+ shouldComponentUpdate(np, ns) {
+       //防止组件不必要的更新
+        return this.props.index !== np.index || this.state.messageCount !== ns.messageCount;
+    }
+ */
