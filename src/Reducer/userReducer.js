@@ -9,11 +9,21 @@ import { Tool } from '../Tool';
  * @returns Object
  */
 
-const User = (state = JSON.parse(Tool.localItem('User')), action) => {
+// const uerInitState =  JSON.parse(Tool.localItem('User'));
+
+const uerInitState = {
+    accesstoken: '',
+    avatar_url: '',
+    id: '',
+    loginname: '',
+    success: false
+};
+
+const User = (state = uerInitState, action) => {
 
     switch (action.type) {
         case 'signinSuccess': //登录成功
-            console.log('aciton')
+            console.log('aciton');
             console.log(action);
             Tool.localItem('User', JSON.stringify(action.target));
             return action.target;
