@@ -1,48 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { Router, Route, IndexRoute, browserHistory, Link } from 'react-router';
-import { connect } from 'react-redux';
-import action from '../Action/Index';
-import { Tool, merged } from '../Tool';
-import { DataLoad, Footer, UserHeadImg, TabIcon, GetNextPage } from './common/index';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+//import { connect } from 'react-redux';
+//import action from '../Action/Index';
+import { Tool, merged } from '../../Tool';
+import { DataLoad, Footer, UserHeadImg, TabIcon, GetNextPage } from '../common/index';
+import Nav from './Nav';
 
 
-/**
- * (导航分类)
- * 
- * @class Nav
- * @extends {Component} 
- */
-class Nav extends Component {
-    render() {
-        var setCur = {};
-        setCur[this.props.tab] = 'on';
-        return (
-            <nav className="index-nav">
-                <ul data-flex="box:mean">
-                    <li className={setCur.all}>
-                        <Link to="/" activeClassName="active">全部</Link>
-                    </li>
-                    <li className={setCur.good}>
-                        <Link to="/?tab=good" activeClassName="active">精华</Link>
-                    </li>
-                    <li className={setCur.share}>
-                        <Link to="/?tab=share" activeClassName="active">分享</Link>
-                    </li>
-                    <li className={setCur.ask}>
-                        <Link to="/?tab=ask" activeClassName="active">问答</Link>
-                    </li>
-                    <li className={setCur.job}>
-                        <Link to="/?tab=job" activeClassName="active">招聘</Link>
-                    </li>
-                </ul>
-                <div className="height"></div>
-            </nav>
-        );
-    }
-    shouldComponentUpdate(np) {
-        return this.props.tab !== np.tab; //tab和之前的不一致，组件才需要更新，否则不更新，提升性能
-    }
-}
 
 /**
  * (循环列表)
@@ -64,6 +28,13 @@ class List extends Component {
     }
 }
 
+/**
+ * =============================================================
+ *  @todo:
+ *  1. 这里可以改成函数值组件，shouldComponentUpdate不需要加
+ *  2. 尝试将这些组件独立出去复用，优化结构，增强可读性
+ * =============================================================
+ */
 class ListItem extends Component {
     render() {
         let {id, title, author, visit_count, reply_count, create_at, last_reply_at} = this.props;
@@ -71,7 +42,9 @@ class ListItem extends Component {
             <li>
                 <Link to={`/topic/${id}`}>
                     <div data-flex="box:first">
-                        <div className="font" data-flex="cross:center"><TabIcon {...this.props} /></div>
+                        <div className="font" data-flex="cross:center">
+                            <TabIcon {...this.props} />
+                        </div>
                         <h3 className="tit">{title}</h3>
                     </div>
                     <div className="bottom" data-flex="box:first">
@@ -93,7 +66,7 @@ class ListItem extends Component {
             </li>
         );
     }
-    shouldComponentUpdate(np) {
+    shouldComponentUpdate(nextProps) {
         return false;
     }
 }
