@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
 
-const Nav = ({ tab })=> (
+const Nav = ()=> (
         <nav className="index-nav">
             <ul data-flex="box:mean">
                 <li>
-                    <IndexLink to="/" activeClassName={tab == 'all' ? 'on' : ''}>全部</IndexLink>
+                    <IndexLink to={{ pathname: '/', query: { tab: undefined } }} activeClassName="on">全部</IndexLink>
                 </li>
                 <li>
                     <Link to="/?tab=good" activeClassName="on">精华</Link>
