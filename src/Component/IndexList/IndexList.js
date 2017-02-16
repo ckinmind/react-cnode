@@ -20,17 +20,21 @@ class IndexList extends Component {
     }
 
     componentWillMount(){
-        /** 根据tab加载第一页的数据，todo: 后期考虑做缓存，不需要每次都要请求新数据，可以在action中处理，在state树种存储页码*/
+        /** 根据tab加载第一页的数据，todo: 后期考虑做缓存，不需要每次都要请求新数据，可以在action中处理，在state树中存储页码*/
         this.props.actions.fetchingIndex(this.tab, 1);
     }
 
     /** 在切换tab的时候加载新数据*/
     componentWillReceiveProps(nextProps){
         console.log('componentWillReceiveProps');
-        console.log(nextProps);
 
         let { tab = 'all' } = nextProps.location.query;
+
+        console.log('this.tab: '+this.tab);
+        console.log('nextProps.tab: '+ tab);
+
         if(tab != this.tab){
+            console.log('tab not same');
             this.tab = tab;
             this.page = 1; /* 将当前page重置为1, 因为切换到了新的栏目，todo: 后期如果做了缓存，这块处理逻辑要变 */
             this.props.actions.fetchingIndex(this.tab, this.page);
@@ -76,11 +80,8 @@ class IndexList extends Component {
 
     render() {
         console.log('indexlist render');
-        console.log(this.props);
-        // let {data, loadAnimation, loadMsg} = this.props.state;
-        // let tab = this.props.location.query.tab || 'all';
         let { isFetching } = this.props.List;
-        console.log('isFetching: ' + isFetching);
+        console.log('isFetching: '+isFetching);
 
         return (
             <div>
@@ -92,7 +93,7 @@ class IndexList extends Component {
                     <Footer index="0" />
                 </div>
 
-                <div style={{display: isFetching ? 'block' : 'none'}}>
+                <div style={{display: isFetching ? 'block' : 'block'}}>
                     <DataLoad />
                 </div>
             </div>
@@ -113,3 +114,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexList);
+
+
+/**
+ * 1. 关于加载
+ *    在tab切换的时候没有加载动画，如果需要有加载动画，则需要两个<DataLoad />组件，一个上部用于tab切换时的加载动画，一个下部用于加载更多当前tab内容
+ *    可以查看hackernews-raect中也是两个加载动画
+ *
+ *
+ * */
