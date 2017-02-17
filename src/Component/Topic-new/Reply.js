@@ -1,33 +1,81 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
-import {Tool} from '../../Tool';
-import {UserHeadImg} from '../common/index';
+import { Link } from 'react-router';
+import { Tool } from '../../Tool';
+import { UserHeadImg } from '../common/index';
+import {  hashHistory } from 'react-router';
+import ReplyBox2 from './ReplyBox2';
 
 class Reply extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            isShowReplyBox: false,
+            ups: this.props.item.ups
+        };
+        this.isUp = this.isUp.bind(this);
+    }
 
     /**
      * 验证当前回复，登陆用户是否点赞
      * 即检查用户id是否在这条回复的ups数组中
      */
     isUp() {
-        if(this.props.isLoaded){
+        if(!this.props.isLoaded){
             return 'false';
         }
-        let { ups } = this.props.item;
         let id = this.props.userID;
-        return ups.indexOf(id) != '-1'
+        return this.state.ups.indexOf(id) != '-1'
     }
 
-    handleClick(){
-        console.log('handleClick');
+    /***
+     * 处理点击回复按钮的操作
+     */
+    handleClick() {
+        let {isLoaded} = this.props;
+        /** 如果没有登录则跳转登录页面*/
+        if (!isLoaded) {
+            hashHistory.push({pathname: '/signin',});
+        }
+        /** 更新ReplyBox的显示状态*/
+        this.setState({
+            isShowReplyBox: !this.state.isShowReplyBox
+        });
     }
+
+    /**
+     * 点赞操作，最后采用手动setState的方式来更新upState，这种方式简单点，否则走store的话复杂了一点
+     * replyId: 当条reply的id
+     * replyLoginname: 评论者的Loginname(用于判断不是自己点赞自己)
+     * upState：当前的reply的点赞状态(登录者有没有点赞这条评论，注意如果为false有两种情况，一种是未登录，一种是未点赞，但是如果未登录点赞是会跳到登录页面)
+     */
+    handleStarReply(replyId, replyLoginname, upState){
+
+        this.props.starReply(replyId, replyLoginname); /* 执行点赞操作*/
+
+        if(this.props.isLoaded){
+            let newUps = '';
+            if(upState){
+                /** 如果已点赞，则取消赞userID*/
+                newUps = this.state.ups.filter(id => id!=this.props.userID); /* 过滤当前登录用户id*/
+                console.log('已点赞: '+newUps);
+                this.setState({ups: newUps});
+            }else{
+                /** 如果未点赞，则ups中增加userID*/
+                newUps = this.state.ups.slice();
+                newUps.push(this.props.userID); /* 注意不要再原state上直接修改，先浅拷贝*/
+                console.log('未点赞: '+newUps);
+                this.setState({ ups: newUps });
+            }
+        }
+    }
+
 
     render() {
 
-        let {id, content, author, ups, create_at} = this.props.item;
+        let {id, content, author, create_at} = this.props.item;
         let upState = this.isUp();
-        let upsCount = ups.length ? ups.length : '';
+        let upsCount = this.state.ups.length || '';
 
         return (
                 <li data-flex>
@@ -42,18 +90,18 @@ class Reply extends Component {
                         </div>
                         <div className="content markdown-body" dangerouslySetInnerHTML={{__html: content}}></div>
                         <div className="bottom" data-flex="main:right">
-                            <div className={`font font-${upState}`} onClick={this.props.starReply.bind(this,id) }>
+                            <div className={`font font-${upState}`} onClick={this.handleStarReply.bind(this, id, author.loginname, upState) }>
                                 <i className="iconfont icon-dianzan "></i>
                                 <em>{ upsCount }</em>
                             </div>
-                            <div className="font" onClick={() => {
-                                this.props.showReplyBox(index)
-                            } }>
+                            {/*<div className="font" onClick={() => {this.props.showReplyBox(index)} }>*/}
+                            <div className="font" onClick={ this.handleClick.bind(this) }>
                                 <i className="iconfont icon-huifu"></i>
                             </div>
                         </div>
                         {/*<ReplyBox placeholder={`@${author.loginname}`} reLoadData={this.props.reLoadData} display={display}*/}
                         {/*loginname={author.loginname} data={{accesstoken, id: this.props.id, reply_id: id}}/>*/}
+                        <ReplyBox2 display={this.state.isShowReplyBox ? 'block' : 'none' } placeholder={`@${author.loginname}`} />
                     </div>
                 </li>
         );
