@@ -29,32 +29,20 @@ class TopicCreate extends Component {
 
         this.postState = false;
 
-        this.tabInput =  this.tabInput.bind(this);
-        this.titleInput =  this.titleInput.bind(this);
-        this.contentInput =  this.contentInput.bind(this);
+        this.handleInput = {
+            tabInput: (e)=> this.state.tab = e.target.value,  /** 监听用户选择发表类型 */
+            titleInput: (e)=> this.state.title = e.target.value, /** 监听用户输入标题*/
+            contentInput: (e)=>   this.state.content = e.target.value  /** 监听用户输入内容 */
+        };
+
         this.submitTopic = this.submitTopic.bind(this);
-    }
-
-    /** 监听用户选择发表类型 */
-    tabInput(e) {
-        this.state.tab = e.target.value;
-    }
-
-    /** 监听用户输入标题*/
-    titleInput(e) {
-        this.state.title = e.target.value;
-    }
-
-    /** 监听用户输入内容 */
-    contentInput(e) {
-        this.state.content = e.target.value;
     }
 
 
     /** 发表主题*/
     submitTopic() {
         var {state} = this;
-       // if (this.postState) return false;
+        if (this.postState) return false;
 
         console.log(this.state);
         if (!state.tab) {
@@ -90,7 +78,7 @@ class TopicCreate extends Component {
         if (!User) {
             main = <TipMsgSignin />
         } else {
-            main = <NewTopic {...this.state} tabInput={this.tabInput} titleInput={this.titleInput} contentInput={this.contentInput} />
+            main = <NewTopic {...this.state} { ...this.handleInput } />
             headerSet = {
                 rightIcon: 'fabu',
                 submitTopic: this.submitTopic
