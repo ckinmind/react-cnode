@@ -27,9 +27,8 @@ class MyMessages extends Component {
             main = <DataLoad loadAnimation={loadAnimation} loadMsg={loadMsg} />;
         } else {
             let {hasnot_read_messages, has_read_messages} = data;
-            /** 原数组这里有问题，这样合并会改变原来的hasnot_read_messages，导致每次点击数据都会变动，然后来回点击的时候，显示的消息会有跳动*/
-            Array.prototype.push.apply(hasnot_read_messages, has_read_messages);
-            main = <MessageList list={hasnot_read_messages} />;
+            let messageList = [...hasnot_read_messages, ...has_read_messages];
+            main = <MessageList list={messageList} />;
 
             console.log('hasnot_read_messages');
             console.log(data);
