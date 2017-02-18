@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import action from '../../Action/Index';
-
+import messageAction from '../../actions/messageActions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { DataLoad, DataNull, Header, TipMsgSignin, Footer, GetData, UserHeadImg } from '../common/index';
 import MessageList from './MessageList';
 
@@ -14,25 +14,30 @@ import MessageList from './MessageList';
  */
 class MyMessages extends Component {
 
+    /** todo: 流程需要优化一下，两边都要判断是否已登录*/
+    componentDidMount(){
+        if(this.props.User.accesstoken){
+            this.props.actions.fetchingMessage();
+        }
+    }
 
     render() {
-        var {data, loadAnimation, loadMsg, id, tabIndex} = this.props.state;
-        var {User, params} = this.props;
 
-        let main = null;
+        let { User, Message } = this.props;
+        let { data } = Message;
 
-        if (!User) {
-            main = <TipMsgSignin />
-        } else if (!data) {
-            main = <DataLoad loadAnimation={loadAnimation} loadMsg={loadMsg} />;
-        } else {
+        let main = '';
+
+        /** 这里判断条件要改，User最后要加isLoaded属性*/
+         if (!User.accesstoken) {
+             main = <TipMsgSignin />
+         } else if (Object.keys(data).length === 0) {   /* 注意判断空对象的方法*/
+             console.log('data is empty');
+             main = <DataLoad />;
+         } else {
             let {hasnot_read_messages, has_read_messages} = data;
             let messageList = [...hasnot_read_messages, ...has_read_messages];
             main = <MessageList list={messageList} />;
-
-            console.log('hasnot_read_messages');
-            console.log(data);
-            console.log(hasnot_read_messages);
         }
 
         return (
@@ -47,26 +52,28 @@ class MyMessages extends Component {
 
 
 
-export default GetData({
-    id: 'MyMessages',  //应用关联使用的redux
-    component: MyMessages, //接收数据的组件入口
-    url: '/api/v1/messages', //服务器请求的地址
-    stop: (props, state) => {
-        return !Boolean(props.User); //true 拦截请求，false不拦截请求
-    },
-    data: (props, state) => { //发送给服务器的数据
-        return { accesstoken: props.User.accesstoken }
-    },
-    success: (state) => { return state; }, //请求成功后执行的方法
-    error: (state) => { return state } //请求失败后执行的方法
+// export default GetData({
+//     id: 'MyMessages',  //应用关联使用的redux
+//     component: MyMessages, //接收数据的组件入口
+//     url: '/api/v1/messages', //服务器请求的地址
+//     stop: (props, state) => {
+//         return !Boolean(props.User); //true 拦截请求，false不拦截请求
+//     },
+//     data: (props, state) => { //发送给服务器的数据
+//         return { accesstoken: props.User.accesstoken }
+//     },
+//     success: (state) => { return state; }, //请求成功后执行的方法
+//     error: (state) => { return state } //请求失败后执行的方法
+// });
+
+
+const mapStateToProps = state => ({
+    Message: state.Message,
+    User: state.User
 });
 
-// export default MyMessages;
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(messageAction, dispatch)
+});
 
-
-
-/**
- * 1. 之前的bug
- * 不断点击消息，会有不断增加消息，很奇怪的问题
- *
- * */
+export default connect(mapStateToProps, mapDispatchToProps)(MyMessages);
