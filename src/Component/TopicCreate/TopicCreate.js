@@ -81,7 +81,7 @@ class TopicCreate extends Component {
             main = <NewTopic {...this.state} { ...this.handleInput } />
             headerSet = {
                 rightIcon: 'fabu',
-                submitTopic: this.submitTopic
+                rightClick: this.submitTopic
             };
         }
         return (
