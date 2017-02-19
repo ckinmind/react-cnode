@@ -8,27 +8,24 @@ import { Tool } from '../../Tool';
  * @class HomeList
  * @extends {Component}
  */
-class HomeList extends Component {
-    render() {
-        let {list, display} = this.props;
-        return (
-            <ul className="list" style={{ display: display }}>
-                {
-                    list.map((item, index) => {
-                        let {id, title, last_reply_at} = item;
-                        return (
-                            <li key={index}>
-                                <Link data-flex="box:last" to={`/topic/${id}`}>
-                                    <div className="tit">{title}</div>
-                                    <time className>{Tool.formatDate(last_reply_at)}</time>
-                                </Link>
-                            </li>
-                        );
-                    })
-                }
-            </ul>
-        );
-    }
-}
+
+const HomeList = ({list, display})=>(
+    <ul className="list" style={{ display: display }}>
+        {
+            list.map((item, index) => {
+                let {id, title, last_reply_at} = item;
+                return (
+                    <li key={index}>
+                        <Link data-flex="box:last" to={`/topic/${id}`}>
+                            <div className="tit">{title}</div>
+                            <time className>{Tool.formatDate(last_reply_at)}</time>
+                        </Link>
+                    </li>
+                );
+            })
+        }
+    </ul>
+);
+
 
 export default HomeList;
