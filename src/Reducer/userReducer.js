@@ -12,28 +12,36 @@ import { Tool } from '../Tool';
 // const uerInitState =  JSON.parse(Tool.localItem('User'));
 
 const uerInitState = {
+    isLogined: false,   /* 是否已登陆 */
     accesstoken: '',
     avatar_url: '',
     id: '',
     loginname: '',
-    success: false
+    success: false,
 };
+
+// const uerInitState = {
+//     isLogined: true,
+//     accesstoken:  "4ea2fd7c-e4be-47c7-903f-3a23d914ef45",
+//     avatar_url:   "https://avatars.githubusercontent.com/u/8199343?v=3&s=120",
+//     id:  "589e03df5c8036f7019e7a7e",
+//     loginname: "ckinmind",
+//     success:  true,
+// };
 
 const User = (state = uerInitState, action) => {
 
     switch (action.type) {
-        case 'signinSuccess': //登录成功
-            console.log('aciton');
+
+        /* 登录成功*/
+        case 'login/LOGIN_SUCCESS':
+           // Tool.localItem('User', JSON.stringify(action.target));
             console.log(action);
-            Tool.localItem('User', JSON.stringify(action.target));
-            return action.target;
-        case 'signin': //退出
-            Tool.removeLocalItem('User');
-            return null;
+
+            return action.userdata;
         default:
             return state;
     }
-
 };
 
 
