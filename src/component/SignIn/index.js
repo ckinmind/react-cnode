@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import loginActions from '../actions/loginActions';
+import loginActions from '../../actions/loginActions';
 
-import { Header } from './common/index';
+import { Header } from '../common/index';
 
 
 /**

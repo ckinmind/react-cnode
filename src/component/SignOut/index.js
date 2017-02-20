@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import logoutActions from '../actions/logoutActions';
+import logoutActions from '../../actions/logoutActions';
 import { hashHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Header } from './common/index';
+import { Header } from '../common/index';
 
 /**
  * 退出登录页

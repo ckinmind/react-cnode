@@ -1,0 +1,98 @@
+
+
+/* 首页分类*/
+
+.index-nav {
+    .height {
+        height: 38px;
+        background: @style-main;
+    }
+    ul {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 9999;
+        height: 38px;
+        background: @style-main;
+    }
+    li {
+        position: relative;
+        line-height: 38px;
+        &+li {
+            &::after {
+                position: absolute;
+                top: 10px;
+                bottom: 10px;
+                content: "";
+                border-left: 1px solid darken(@style-main, 10%);
+                border-right: 1px solid lighten(@style-main, 10%);
+            }
+        }
+    }
+    .on {
+        //a {
+        margin: 5px 10px;
+        line-height: 28px;
+        border-radius: 8px;
+        background: darken(@style-main, 10%);
+        //}
+    }
+    a {
+        display: block;
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+    }
+}
+
+.index-list-box {
+    .zhanwei {
+        display: none;
+    }
+    & + div {
+        padding-bottom: 50px;
+    }
+}
+
+
+/* 首页列表 */
+
+.index-list {
+    overflow: hidden;
+    background: #fff;
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .tit {
+        overflow: hidden;
+        height: 28px;
+        line-height: 28px;
+        font-size: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .author {
+        padding-right: 5px;
+    }
+    .con {
+        line-height: 20px;
+        font-size: 12px;
+        color: #666;
+    }
+    time {
+        font-size: 12px;
+    }
+    .bottom {
+        margin-top: 5px;
+    }
+    .font {
+        .iconfont {
+            padding: 3px 5px;
+            margin-right: 5px;
+            border-radius: 5px;
+            color: #fff;
+        }
+    }
+}

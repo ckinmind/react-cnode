@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import route from './Route'; //路由配置
-import reducer from './Reducer/rootReducer';
+import reducer from './reducer/rootReducer';
 
 
 import 'normalize.css';                    /* 重置浏览器默认样式 */

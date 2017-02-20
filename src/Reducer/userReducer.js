@@ -13,6 +13,8 @@ const uerInitState = {
     success: false
 };
 
+
+
 const User = (state = uerInitState, action) => {
 
     switch (action.type) {

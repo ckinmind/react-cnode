@@ -29,6 +29,7 @@ dist
 
 # 备份文件夹
 backups
+src/reducer/userReducer.js
 
 # Bower
 bower_components/
