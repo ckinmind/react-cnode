@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import starActions from '../../actions/starActions';
+import replyActions from '../../actions/replyActions';
 import Reply from './Reply';
 
 /**
@@ -16,7 +17,7 @@ class ReplyList extends Component {
         /* todo: isLoader属性的判断方法后面要改成直接能在User中获取 */
         let userProps = {
             userID: this.props.User.id,
-            isLoaded: this.props.User.id,
+            isLoaded: !!this.props.User.id
         };
         let { starReply } = this.props.actions;
 
@@ -24,7 +25,7 @@ class ReplyList extends Component {
             <ul className="re-list">
                 {
                     this.props.replies.map((item, index) => (
-                        <Reply key={index} item={item} index={index} {...userProps} starReply={starReply} />
+                        <Reply key={index} item={item} index={index} {...userProps} starReply={starReply} replyTopic={this.props.actions.replyTopic}/>
                     ))
                 }
             </ul>
@@ -33,12 +34,13 @@ class ReplyList extends Component {
 }
 
 const mapStateToProps = state => ({
-    replies: state.Topic2.data.replies,
+    replies: state.Topic.data.replies,
     User: state.User
 });
 
+let actions = {...starActions, ...replyActions};  /* 一个是点赞的操作，一个是回复的操作*/
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(starActions, dispatch)
+    actions: bindActionCreators(actions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReplyList);

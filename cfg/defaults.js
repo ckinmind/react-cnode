@@ -47,7 +47,7 @@ function getDefaultModules() {
       {
         // test: /\.(png|jpg|gif|woff|woff2)$/,
          // test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)$/,
-          test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
+          test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,  //这条可以处理eot之类的，为什么上一条不行
           loader: 'url-loader?limit=8192'
       },
       {

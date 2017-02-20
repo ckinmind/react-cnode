@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DataLoad, Header, Footer, GetData } from '../common/index';
+import { DataLoad, Header, Footer } from '../common/index';
 import Home from './Home.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -11,32 +11,16 @@ import userViewActions from '../../actions/userViewActions';
  */
 class UserView extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = this.props.state;
-
-        // this.tab = (tabIndex) => {
-        //     this.state.tabIndex = tabIndex;
-        //     this.props.setState(this.state);
-        // }
-    }
-
     componentDidMount(){
-        console.log('componentDidMount');
         this.props.actions.getUserView(this.props.params.loginname);
     }
 
 
-
     render() {
-        console.log('userview');
-        console.log(this.props);
 
-        // let {data} = this.props.state;
         let  userview  = this.props.UserView;
         let { User, params} = this.props;
 
-        // let main = data ? <Home data={data} /> : <DataLoad />;
         let main = Object.keys(userview).length ? <Home data={userview} /> : <DataLoad />;
 
         /* 顶部文字也不一样*/
@@ -58,19 +42,6 @@ class UserView extends Component {
         );
     }
 }
-
-
-
-// export default GetData({
-//     id: 'UserView',  //应用关联使用的redux
-//     component: UserView, //接收数据的组件入口
-//     url: (props, state) => {
-//         return '/api/v1/user/' + props.params.loginname;
-//     },
-//     data: {},
-//     success: (state) => { return state; }, //请求成功后执行的方法
-//     error: (state) => { return state } //请求失败后执行的方法
-// });
 
 
 const mapStateToProps = state => ({

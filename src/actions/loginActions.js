@@ -6,7 +6,7 @@
 let loginActions = {
 
     login: function(accessToken){
-        return function(dispatch, getState){
+        return function(dispatch){
 
             fetch('https://cnodejs.org/api/v1/accesstoken', {
                     method: 'POST',

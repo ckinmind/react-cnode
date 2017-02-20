@@ -27,6 +27,9 @@ build/Release
 node_modules
 dist
 
+# 备份文件夹
+backups
+
 # Bower
 bower_components/
 

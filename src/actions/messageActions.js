@@ -6,12 +6,8 @@
 let messagesActions = {
 
     fetchingMessage: function(){
-
-        console.log('getMessage 1');
-
         return function(dispatch, getState){
 
-            console.log('getMessage 2');
             let { accesstoken } = getState().User;
 
             fetch(`https://cnodejs.org/api/v1/messages?accesstoken=${accesstoken}`)

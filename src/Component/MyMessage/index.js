@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 import messageAction from '../../actions/messageActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { DataLoad, DataNull, Header, TipMsgSignin, Footer, GetData, UserHeadImg } from '../common/index';
+import { DataLoad, Header, TipMsgSignin, Footer } from '../common/index';
 import MessageList from './MessageList';
 
 
 /**
  * 模块入口
- * 
  * @class Main
  * @extends {Component}
  */
 class MyMessages extends Component {
 
-    /** todo: 流程需要优化一下，两边都要判断是否已登录*/
+    /** todo: 流程需要优化一下，两边都要判断是否已登录这不太合理*/
     componentDidMount(){
         if(this.props.User.accesstoken){
             this.props.actions.fetchingMessage();
@@ -32,7 +31,6 @@ class MyMessages extends Component {
          if (!User.accesstoken) {
              main = <TipMsgSignin />
          } else if (Object.keys(data).length === 0) {   /* 注意判断空对象的方法*/
-             console.log('data is empty');
              main = <DataLoad />;
          } else {
             let {hasnot_read_messages, has_read_messages} = data;

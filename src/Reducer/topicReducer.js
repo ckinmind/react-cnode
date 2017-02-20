@@ -41,12 +41,18 @@ const Topic = (state = topicInitState, action) => {
             return { ...state, isFetching:true };
 
         case 'topic/DONE_FETCHING_TOPIC':
-            console.log('TopicReducer');
-            console.log(action);
             return { isFetching:false, data: action.data };
 
         case 'topic/FAIL_FETCHING_TOPIC':
             return { ...state, isFetching:false };
+
+        case 'topic/ADD_NEW_REPLY':
+            let newReply = [...state.data.replies,action.reply];
+            let newData = {...state.data, replies: newReply};
+            return {
+                isFetching: false,
+                data: newData
+            };
 
         default:
             return state;

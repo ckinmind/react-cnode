@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { UserHeadImg, TabIcon2 } from '../common/index';
+import { UserHeadImg, TabIcon } from '../common/index';
 import {Tool} from '../../Tool';
 
 const ListItem = ({id, title, author, visit_count, reply_count, create_at, last_reply_at, tab, good, top}) => (
@@ -8,7 +8,7 @@ const ListItem = ({id, title, author, visit_count, reply_count, create_at, last_
         <Link to={`/topic/${id}`}>
             <div data-flex="box:first">
                 <div className="font" data-flex="cross:center">
-                    <TabIcon2 icon={{tab, good, top}}/>
+                    <TabIcon icon={{tab, good, top}}/>
                 </div>
                 <h3 className="tit">{title}</h3>
             </div>

@@ -11,7 +11,7 @@ let starActions = {
 
             /** 如果没登录则跳转登录页*/
             if (!loginname) {
-                return hashHistory.push({pathname: '/signin',});
+                return hashHistory.push({pathname: '/signin'});
             } else if (loginname == replyLoginname) {
                 return alert('你不能给自己点赞');
             }

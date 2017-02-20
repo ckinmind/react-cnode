@@ -1,12 +1,12 @@
-
+/**
+ *  首页加载的action
+ */
 let indexActions = {
 
     /** 加载topic异步操作*/
     fetchingIndex: function(tab = 'all', page = 1){
 
         return function(dispatch, getState){
-
-            console.log('fetchingIndex');
 
             /** 如果上一次加载还未完成则则阻止下一次加载*/
             if(getState().List.isFetching){
@@ -42,8 +42,7 @@ let indexActions = {
     }),
     failFetchingIndex: ()=>({
         type: 'index/FAIL_FETCHING_INDEX'
-    }),
-
+    })
 
 };
 

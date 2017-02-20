@@ -5,7 +5,7 @@ let userViewActions = {
 
     /** 加载topic异步操作*/
     getUserView: function(loginname){
-        return function(dispatch, getState){
+        return function(dispatch){
 
             fetch(`https://cnodejs.org/api/v1/user/${loginname}`)
             .then(response => response.json())
@@ -16,7 +16,7 @@ let userViewActions = {
                 } else {
                     /** 数据返回失败后的操作*/
                     alert('用户不存在');
-                    hashHistory.push({pathname: '/',});
+                    hashHistory.push({pathname: '/'});
                 }
             })
         }
@@ -25,7 +25,7 @@ let userViewActions = {
     doneGetUserView: (json)=>({
         type: 'userview/DONE_GET_USERVIEW',
         data: json.data
-    }),
+    })
 };
 
 export default userViewActions;

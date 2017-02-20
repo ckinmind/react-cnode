@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Tool } from '../../Tool';
 
 /**
  * 回复框
@@ -8,51 +7,54 @@ import { Tool } from '../../Tool';
  * @extends {Component}
  */
 class ReplyBox extends Component {
+
     constructor(props) {
         super(props);
-        this.state = { btnname: '回复' };
+        this.state = {
+            btnname: '回复',
+            display: this.props.display
+        };
+    }
 
-        /**
-         * 提交回复
-         *
-         * @returns
-         */
-        this.submit = () => {
-            this.state = { btnname: '提交中...' };
-            var data = this.props.data;
-            if (data.reply_id) {
-                data.content = `[@${this.props.loginname}](/user/${this.props.loginname}) ${this.refs.content.value}`;
-            } else {
-                data.content = this.refs.content.value;
-            }
-            if (data.content == '') {
-                return alert('回复内容不能为空！');
-            }
-            data.content += '\n\r<br><br>来自<a href="https://lzxb.github.io/react-cnode/" target="_blank">react-cnode手机版</a>';
-            Tool.post(`/api/v1//topic/${data.id}/replies`, data, (res) => {
-                this.setState({ btnname: '回复成功，刷新页面中..' });
-                this.refs.content.value = '';
-                Tool.get(`/api/v1//topic/${data.id}`, {}, (res) => {
-                    this.props.reLoadData(res.data); //刷新页面
-                    this.setState({ btnname: '回复' });
-                }, () => {
-                    this.state = { btnname: '刷新失败，请手动刷新试试' }
-                });
+    componentWillReceiveProps(nextProps){
+        if(nextProps.display != this.state.display){
+            this.setState({
+                display: nextProps.display
+            });
+        }
+    }
 
-            }, (res) => {
-                this.setState({ btnname: '回复失败' });
+    handleReply(){
+        let content = this.refs.textarea.value;
+        /** 有@符号表示是对别人的回复，则最终内容需要加上@用户名*/
+        if(this.props.placeholder.indexOf('@') != -1){
+            content = `${this.props.placeholder} `+ content;
+        }
+        let replyId = this.props.replyId;
+        this.props.replyTopic(content, replyId);
+
+        /** todo: 这里回复成功后需要做一些清理工作，比如清除原来的输入内容，然后如果不是底部的回复框还需要收起来，这里需要注意display的来源*/
+
+        this.refs.textarea.value = '';
+
+        /** todo: 这里的隐藏还是有问题*/
+        if(!this.props.isBottom){
+            this.setState({
+                display: 'none'
             });
         }
 
     }
+
+
     render() {
         return (
-            <div className="reply-box" style={{ display: this.props.display }}>
+            <div className="reply-box" style={{ display: this.state.display }}>
                 <div className="text">
-                    <textarea ref="content" placeholder={this.props.placeholder}></textarea>
+                    <textarea ref="textarea" placeholder={this.props.placeholder}></textarea>
                 </div>
                 <div data-flex="main:right">
-                    <button className="btn" onClick={this.submit}>{this.state.btnname}</button>
+                    <button className="btn" onClick={ this.handleReply.bind(this) }>{this.state.btnname}</button>
                 </div>
             </div>
         );
@@ -60,6 +62,8 @@ class ReplyBox extends Component {
 }
 
 ReplyBox.defaultProps = {
+    isBottom: false,  /* 是否是底部的回复框*/
+    replyId: '',
     display: 'block',
     placeholder: '回复支持Markdown语法,请注意标记代码'
 };

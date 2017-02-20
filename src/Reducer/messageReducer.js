@@ -41,7 +41,6 @@ const Message = (state = messageInitState, action) => {
         case 'message/DONE_FETCHING_MESSAGE':
             return { data: action.data };
 
-
         default:
             return state;
     }
