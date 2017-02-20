@@ -1,6 +1,5 @@
 # react-cnode
 
-
 ## 技术栈
 - `React` with ES6
 - `redux` for predictable state
@@ -16,3 +15,20 @@
 ## 版本更新(查看Branch / Tags)
 - **[v1.1]**:改写所有页面, 数据更新走action-reducer, 详细更新说明 [issue 1](https://github.com/ckinmind/react-cnode/issues/1)
 - **[v1.0]**:原始版本(基本同原项目)
+
+## 如何开始
+```js
+> git clone https://github.com/ckinmind/react-cnode.git
+> cd react-cnode
+> npm install
+> npm start
+```
+
+## 问题收录
+- 关于在一个异步action中无法调用另一个异步action的问题(同步action可以), 查看 [issue 12](https://github.com/ckinmind/react-cnode/issues/12)
+- 关于在removeEventListener时候遇到的问题, 查看 [issue 11](https://github.com/ckinmind/react-cnode/issues/11)
+- 关于导航的高亮以及类似(/?tab=a)这样的链接高亮问题, 查看 [issue 9](https://github.com/ckinmind/react-cnode/issues/9)
+- 关于dangerouslySetInnerHTML的问题(直接显示html),  查看 [issue 7](https://github.com/ckinmind/react-cnode/issues/7)
+- 关于原应用和改写后应用存在的问题, 查看 [issue 6](https://github.com/ckinmind/react-cnode/issues/6)
+- 关于路由跳转(在组件和异步action中), 查看 [issue 5](https://github.com/ckinmind/react-cnode/issues/5)
+- 关于PureComponet使用问题, 查看 [issue 3](https://github.com/ckinmind/react-cnode/issues/3)
