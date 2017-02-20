@@ -1,15 +1,21 @@
 import {  hashHistory } from 'react-router';
 
+/***
+ *  创建一个Topic
+ *  数据没走store, 传入的topic是引用
+ */
+
 const createTopic = topic => {
     return function(dispatch, getState) {
 
+        /* 防止多次提交 */
         if(topic.isSubmitting){
-            console.log('isSubmitting true');
             return false
         }
 
         let {tab, title, content} = topic;
 
+        /* 提交前检测*/
         if(!tab)
             return alert('请选择发表类型');
          else if(title.length < 10)
@@ -29,6 +35,7 @@ const createTopic = topic => {
         .then(json => {
             if (json.success) {
                 topic.isSubmitting = false;
+                /* 提交成功后跳转到对应的topic*/
                 hashHistory.push({pathname: '/topic/' + json.topic_id});
             }else{
                 topic.isSubmitting = false;
