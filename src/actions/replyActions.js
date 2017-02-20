@@ -4,7 +4,6 @@
 let replyActions = {
 
     /** 加载topic异步操作*/
-    // replyTopic: function(topicId, replyId){
     replyTopic: function(content, reply_id = ''){
 
         return function(dispatch, getState){
@@ -12,8 +11,9 @@ let replyActions = {
             /** 正在提交中*/
 
             /** 发送评论请求*/
-            let topicId = getState().Topic2.data.id;
+            let topicId = getState().Topic.data.id;
             let accesstoken = getState().User.accesstoken;
+            content += `——来自[react-cnode](https://github.com/ckinmind/react-cnode)`;
 
             fetch(`https://cnodejs.org/api/v1/topic/${topicId}/replies`, {
                 method: 'POST',
@@ -23,7 +23,8 @@ let replyActions = {
             .then(response => response.json())
             .then(json => {
                 if (json.success) {
-                    console.log('replyAction done');
+
+                    /** 构建一条reply回复数据*/
                     let reply = {
                         id: json.reply_id,
                         author: {
@@ -46,7 +47,7 @@ let replyActions = {
     doneReplyTopic: (reply)=>({
         type: 'topic/ADD_NEW_REPLY',
         reply: reply
-    }),
+    })
 
 };
 
