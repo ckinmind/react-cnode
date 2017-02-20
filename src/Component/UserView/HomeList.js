@@ -18,7 +18,7 @@ const HomeList = ({list, display})=>(
                     <li key={index}>
                         <Link data-flex="box:last" to={`/topic/${id}`}>
                             <div className="tit">{title}</div>
-                            <time className>{Tool.formatDate(last_reply_at)}</time>
+                            <time>{Tool.formatDate(last_reply_at)}</time>
                         </Link>
                     </li>
                 );

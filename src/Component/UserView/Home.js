@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { UserHeadImg } from '../common/index';
 import HomeList from './HomeList';
 import { Tool } from '../../Tool';
-import { Link, IndexLink } from 'react-router';
 
 /**
  * 个人主页
- *
- * @class Home
- * @extends {Component}
+ *  todo: 第一次进个人中心是没有数据的，加载过一次之后有数据了，但是如果点击别人的个人空间，会有一个短暂的从之前的个人中心切换到
+ *  新的个人中心的过程，加载过程没有了，知识因为reducer中保存了上一次的数据，这里地方不太合理
  */
 class Home extends Component {
 
