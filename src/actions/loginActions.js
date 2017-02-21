@@ -37,7 +37,7 @@ let loginActions = {
     },
 
     beginLogin:()=>({
-        type: 'login/BEGIN_LOGIN',
+        type: 'login/BEGIN_LOGIN'
     }),
 
     success: (json) => ({
