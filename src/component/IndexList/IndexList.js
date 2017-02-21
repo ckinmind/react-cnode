@@ -54,34 +54,20 @@ class IndexList extends Component {
         window.removeEventListener('scroll', this._handleScroll)
     }
 
-
-    /**
-     * 获取列表数据
-     */
-    getList(){
-        let { data } = this.props.List;
-        if( data.length){
-            return  data.map(item => <ListItem key={item.id} {...item} />)
-        }else{
-            return null;
-        }
-    }
-
-
     render() {
-        let { isFetching } = this.props.List;
+        let { isFetching, data } = this.props.List;
 
         return (
             <div>
                 <div className="index-list-box">
                     <Nav />
                     <ul className="index-list">
-                        { this.getList() }
+                        { data.map(item => <ListItem key={item.id} {...item} />) }
                     </ul>
                     <Footer index="0" />
                 </div>
 
-                <div style={{display: isFetching ? 'block' : 'block'}}>
+                <div style={{display: isFetching ? 'block' : 'none'}}>
                     <DataLoad />
                 </div>
             </div>
