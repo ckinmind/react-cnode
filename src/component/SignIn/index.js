@@ -23,13 +23,14 @@ class SignIn extends Component {
 
     /** 当登录成功，SignIn组件或接受到新的User数据，然后根据isLogined来决定跳转到个人中心还是清空输入框 */
     componentWillReceiveProps(nextProps){
-        let { isLogined, loginname } = nextProps.User;
+        let { isLogined, loginname, onLogining } = nextProps.User;
         if(isLogined){
             /* 登录成功跳转 */
             hashHistory.push({ pathname: '/user/' + loginname });
-        }else{
-            /* 登录失败清空输入框 todo: 这里清空操作不对，留待以后改写 */
-           // this.tokenInput.value = '';
+        }else if(!onLogining){
+            /** 这里if生效的条件是未登录且不处于登录状态*/
+            this.tokenInput.value = '';
+            alert('登录失败');
         }
     }
 
@@ -40,6 +41,8 @@ class SignIn extends Component {
     }
 
     render() {
+        let { onLogining} = this.props.User;
+        let loginText = onLogining ? '登陆中...' : '登录';
         return (
             <div>
                 <Header title="登录" leftIcon="fanhui" />
@@ -48,7 +51,7 @@ class SignIn extends Component {
                         <div className="text">
                             <input ref={input => {this.tokenInput = input}} type="text" placeholder="Access Token" />
                         </div>
-                        <button className="btn" onClick={this.handleClick.bind(this)}>登录</button>
+                        <button className="btn" onClick={this.handleClick.bind(this)}>{ loginText }</button>
                     </div>
                 </div>
             </div>

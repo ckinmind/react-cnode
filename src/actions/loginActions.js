@@ -6,7 +6,15 @@
 let loginActions = {
 
     login: function(accessToken){
-        return function(dispatch){
+        return function(dispatch, getState){
+
+            /** 防止多次触发登录请求*/
+            if(getState().User.onLogining){
+                return
+            }
+
+            /** 显示加载状态(登录按钮文字变成登陆中) */
+            dispatch(loginActions.beginLogin());
 
             fetch('https://cnodejs.org/api/v1/accesstoken', {
                     method: 'POST',
@@ -18,18 +26,27 @@ let loginActions = {
                 if (json.success) {
                     json.accesstoken = accessToken;
                     json.isLogined = true;
+                    json.onLogining = false;
                     dispatch(loginActions.success(json));
                 } else {
-                    alert('登录失败'); /* 简化处理，直接弹出登陆失败提示框*/
+                    dispatch(loginActions.fail(json));
                 }
             })
         }
 
     },
 
+    beginLogin:()=>({
+        type: 'login/BEGIN_LOGIN',
+    }),
+
     success: (json) => ({
         type: 'login/LOGIN_SUCCESS',
         userdata: json
+    }),
+
+    fail: ()=>({
+        type: 'login/LOGIN_FAIL'
     })
 
 };
