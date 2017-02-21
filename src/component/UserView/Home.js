@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { UserHeadImg } from '../common/index';
-import TabList from './TabList';
 import { Tool } from '../../Tool';
-
-
-import './test.css';
-
 import TabsControl from './TabsControl';
-
+import TabList from './TabList';
 
 
 
@@ -44,20 +39,6 @@ class Home extends Component {
                     <TabList list={recent_topics} />
                     <TabList list={recent_replies} />
                 </TabsControl>
-
-                {/*<ul className="tab-nav" data-flex="box:mean">*/}
-                    {/*<li onClick={ ()=>{this.setState({tabIndex:0})} } className={arrOn[0]}>主题</li>*/}
-                    {/*<li onClick={ ()=>{this.setState({tabIndex:1})} } className={arrOn[1]}>回复</li>*/}
-                {/*</ul>*/}
-                {/*<HomeList list={recent_topics} display={arrDisplay[0]} />*/}
-                {/*<HomeList list={recent_replies} display={arrDisplay[1]} />*/}
-
-                {/*<TabsControl>*/}
-                    {/*<Tab title="主题" list={ recent_topics } />*/}
-                    {/*<Tab title="回复" list={ recent_replies } />*/}
-                {/*</TabsControl>*/}
-
-
 
             </div>
         );

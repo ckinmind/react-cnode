@@ -20,7 +20,6 @@ class TabsControl extends Component {
     }
 
     render() {
-        let that = this;
 
         return (
             <div>
@@ -34,10 +33,6 @@ class TabsControl extends Component {
                         ))
                     }
                 </ul>
-
-                {/*{React.Children.map(this.props.children, (element, index) => {*/}
-                    {/*return (<div style={{ display: this.getContentItemCssClasses(index) }}>{element}</div>)*/}
-                {/*})} */}
 
                 {React.Children.map(this.props.children, (element, index) => {
                     return (<div style={{ display: this.getContentItemCssClasses(index) }}>{element}</div>)
