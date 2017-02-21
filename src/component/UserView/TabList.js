@@ -9,8 +9,8 @@ import { Tool } from '../../Tool';
  * @extends {Component}
  */
 
-const HomeList = ({list, display})=>(
-    <ul className="list" style={{ display: display }}>
+const TabList = ({list})=>(
+    <ul className="list">
         {
             list.map((item, index) => {
                 let {id, title, last_reply_at} = item;
@@ -28,4 +28,4 @@ const HomeList = ({list, display})=>(
 );
 
 
-export default HomeList;
+export default TabList;

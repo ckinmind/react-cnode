@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { UserHeadImg } from '../common/index';
-import HomeList from './HomeList';
+import TabList from './TabList';
 import { Tool } from '../../Tool';
+
+
+import './test.css';
+
+import TabsControl from './TabsControl';
+
+
+
+
 
 /**
  * 个人主页
@@ -30,12 +39,26 @@ class Home extends Component {
                     <div className="name">{loginname}</div>
                     <div className="score">积分：{score}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册于：{Tool.formatDate(create_at)}</div>
                 </div>
-                <ul className="tab-nav" data-flex="box:mean">
-                    <li onClick={ ()=>{this.setState({tabIndex:0})} } className={arrOn[0]}>主题</li>
-                    <li onClick={ ()=>{this.setState({tabIndex:1})} } className={arrOn[1]}>回复</li>
-                </ul>
-                <HomeList list={recent_topics} display={arrDisplay[0]} />
-                <HomeList list={recent_replies} display={arrDisplay[1]} />
+
+                <TabsControl tabs={['主题','回复']}>
+                    <TabList list={recent_topics} />
+                    <TabList list={recent_replies} />
+                </TabsControl>
+
+                {/*<ul className="tab-nav" data-flex="box:mean">*/}
+                    {/*<li onClick={ ()=>{this.setState({tabIndex:0})} } className={arrOn[0]}>主题</li>*/}
+                    {/*<li onClick={ ()=>{this.setState({tabIndex:1})} } className={arrOn[1]}>回复</li>*/}
+                {/*</ul>*/}
+                {/*<HomeList list={recent_topics} display={arrDisplay[0]} />*/}
+                {/*<HomeList list={recent_replies} display={arrDisplay[1]} />*/}
+
+                {/*<TabsControl>*/}
+                    {/*<Tab title="主题" list={ recent_topics } />*/}
+                    {/*<Tab title="回复" list={ recent_replies } />*/}
+                {/*</TabsControl>*/}
+
+
+
             </div>
         );
     }

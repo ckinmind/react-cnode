@@ -1,0 +1,58 @@
+.container,
+.container * {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 400px;
+    height: 600px;
+    border: 1px solid #999;
+}
+.tab-title-items {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    table-layout: fixed;
+    border-bottom: 1px solid #999;
+}
+
+.tab-title-item {
+    display: table-cell;
+    width: 1%;
+    height: 50px;
+    color: #333;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tab-title-item.active{
+    background-color: #333;
+    color: #fff;
+}
+
+.tab-content-item{
+    display: none;
+}
+.tab-content-item.active{
+    display: block;
+}
+
+.red,
+.blue,
+.yellow {
+    padding: 10px;
+    height: 300px;
+    width: 400px;
+}
+
+.red {
+    background-color: red;
+}
+.yellow {
+    background-color: yellow;
+}
+.blue {
+    background-color: blue;
+}

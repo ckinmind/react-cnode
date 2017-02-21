@@ -6,6 +6,7 @@
 
 const uerInitState = {
     isLogined: false,   /* 是否已登陆 */
+    onLogining: false,
     accesstoken: '',
     avatar_url: '',
     id: '',
@@ -13,16 +14,22 @@ const uerInitState = {
     success: false
 };
 
-
-
 const User = (state = uerInitState, action) => {
 
     switch (action.type) {
 
-        /*登录成功*/
+        case 'login/BEGIN_LOGIN':
+            return  {...state, onLogining: true};
+
+        /* 登录成功, 数据处理在loginAction中已经处理了 */
         case 'login/LOGIN_SUCCESS':
             return action.userdata;
-        /*登出*/
+
+        /* 登录失败 */
+        case 'login/LOGIN_FAIL':
+            return {...state, onLogining: false};
+
+        /* 登出 */
         case 'logout/LOGOUT':
             return uerInitState;
         default:

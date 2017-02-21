@@ -15,6 +15,7 @@ class SignIn extends Component {
 
     /** 登录成功后再次访问登录页时跳转到个人中心）*/
     componentWillMount() {
+        console.log('componentWillMount');
         let { isLogined, loginname } = this.props.User;
         if (isLogined){
             hashHistory.push({ pathname: '/user/' + loginname });
@@ -23,6 +24,7 @@ class SignIn extends Component {
 
     /** 当登录成功，SignIn组件或接受到新的User数据，然后根据isLogined来决定跳转到个人中心还是清空输入框 */
     componentWillReceiveProps(nextProps){
+        console.log('componentWillReceiveProps');
         let { isLogined, loginname, onLogining } = nextProps.User;
         if(isLogined){
             /* 登录成功跳转 */
@@ -34,6 +36,10 @@ class SignIn extends Component {
         }
     }
 
+    componentWillUnmount(){
+        console.log('componentWillUnmount');
+    }
+
     /** 处理登录的请求*/
     handleClick(){
         let accesstoken = this.tokenInput.value;
@@ -41,6 +47,7 @@ class SignIn extends Component {
     }
 
     render() {
+        console.log('render');
         let { onLogining} = this.props.User;
         let loginText = onLogining ? '登陆中...' : '登录';
         return (
