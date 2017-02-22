@@ -6,12 +6,6 @@ import { bindActionCreators } from 'redux';
 
 /**
  * 底部导航菜单
- *
- * 更改记录
- * 1. 修改高亮的方式，使用Link和IndexLink来简化
- * 2. 试用了PureComponent, 去掉了shouldComponentUpdate
- * 3. 去掉了connect里的action('User')，没有用处
- *
  */
 class Footer extends PureComponent {
 
@@ -27,7 +21,7 @@ class Footer extends PureComponent {
         let { isLogined } = this.props.User;
         /** 登录状态下才能发送请求获取未读消息数目 */
         if(isLogined){
-            this.props.actions.getMessageCount();
+           // this.props.actions.getMessageCount();
         }
     }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import Timer from './component/common/Timer';
 
 import IndexList from './component/IndexList';            /* 首页组件 */
 import Topic from './component/Topic';                    /* 主题详情 */
@@ -15,7 +16,10 @@ import SignOut from './component/SignOut';                /* 退出 */
  * 所有页面的通用部分写在这里
  */
 const Roots = ({children})=> (
-    <div>{ children }</div>
+    <div>
+        <Timer />
+        { children }
+    </div>
 );
 
 

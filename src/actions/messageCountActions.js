@@ -19,6 +19,7 @@ let messagesCountActions = {
 
         }
     },
+
     doneGetMessageCount: (json)=>({
         type: 'messageCount/DONE_GET_MESSAGECOUNT',
         count: json.data

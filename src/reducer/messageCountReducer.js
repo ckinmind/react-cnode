@@ -1,7 +1,7 @@
 
 
 /**
- * 存储消息的reducer
+ * 存储未读消息数目的reducer
  */
 
 const messageCountInitState = {
