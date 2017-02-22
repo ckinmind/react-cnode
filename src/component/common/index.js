@@ -3,26 +3,14 @@ import { Link } from 'react-router';
 
 /**
  * (加载动画)
- *
- * @class DataLoad
- * @extends {Component}
  */
-export class DataLoad extends Component {
-    render() {
-        let {loadAnimation, loadMsg} = this.props;
-        return (
-            <div className={'data-load data-load-' + loadAnimation}>
-                <div className="msg">{loadMsg}</div>
-            </div>
-        );
-    }
-}
+const DataLoad = ()=> (
+        <div className="data-load data-load-true">
+            <div className="msg">正在加载中</div>
+        </div>
+);
 
-DataLoad.defaultProps = {
-    loadAnimation: true, //默认显示加载动画
-    loadMsg: '正在加载中'
-};
-
+export { DataLoad };
 
 /**
  * 暂无记录

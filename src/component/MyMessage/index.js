@@ -6,8 +6,6 @@ import {DataLoad, TipMsgSignin} from '../common/index';
 import MessageList from './MessageList';
 import Footer from '../common/Footer';
 import Header from '../common/Header';
-
-
 /**
  * 个人消息页
  */
