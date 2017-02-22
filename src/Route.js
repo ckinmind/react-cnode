@@ -1,13 +1,13 @@
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-import IndexList from './component/IndexList/IndexList';        /* 首页组件 */
-import Topic from './component/Topic/Topic';                    /* 主题详情 */
-import TopicCreate from './component/TopicCreate';              /* 发布主题 */
-import MyMessages from './component/MyMessage/';                /* 我的消息 */
-import UserView from './component/UserView/UserView';           /* 我的个人中心 */
-import SignIn from './component/SignIn';                        /* 登录 */
-import SignOut from './component/SignOut';                      /* 退出 */
+import IndexList from './component/IndexList';            /* 首页组件 */
+import Topic from './component/Topic';                    /* 主题详情 */
+import TopicCreate from './component/TopicCreate';        /* 发布主题 */
+import MyMessages from './component/MyMessage/';          /* 我的消息 */
+import UserView from './component/UserView';              /* 我的个人中心 */
+import SignIn from './component/SignIn';                  /* 登录 */
+import SignOut from './component/SignOut';                /* 退出 */
 
 /**
  * 路由根目录组件，显示当前符合条件的组件
