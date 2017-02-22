@@ -5,7 +5,7 @@ import Timer from './component/common/Timer';
 import IndexList from './component/IndexList';            /* 首页组件 */
 import Topic from './component/Topic';                    /* 主题详情 */
 import TopicCreate from './component/TopicCreate';        /* 发布主题 */
-import Messages from './component/Message/';          /* 我的消息 */
+import Messages from './component/Message/';              /* 我的消息 */
 import UserView from './component/UserView';              /* 我的个人中心 */
 import SignIn from './component/SignIn';                  /* 登录 */
 import SignOut from './component/SignOut';                /* 退出 */
