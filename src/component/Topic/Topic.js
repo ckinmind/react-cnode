@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { DataLoad, Header } from '../common/index';
-
-import Article from './Article';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import topicActions from '../../actions/topicActions';
 import replyActions from '../../actions/replyActions';
-import { bindActionCreators } from 'redux';
+import Header from '../common/Header';
+import { DataLoad } from '../common/index';
+import Article from './Article';
 
 /**
  * 模块入口
@@ -33,7 +33,7 @@ class Topic extends Component {
     render() {
         return (
             <div>
-                <Header title="详情" leftIcon="fanhui" />
+                <Header mode="topic" />
                 { this.getLoadingState() }
             </div>
         );

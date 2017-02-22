@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import createTopicAction from '../../actions/createTopicAction';
 import { bindActionCreators } from 'redux';
-import {  Header, TipMsgSignin, Footer } from '../common/index';
+import createTopicAction from '../../actions/createTopicAction';
+import { TipMsgSignin } from '../common/index';
+import Header from '../common/Header';
+import Footer from '../common/Footer';
 import TopicForm from './TopicForm';
 
 /**
@@ -42,20 +44,15 @@ class TopicCreate extends Component {
 
     render() {
         let { isLogined} = this.props.User;
-        let headerSet = {};
         let main = null;
         if (!isLogined) {
             main = <TipMsgSignin />
         } else {
             main = <TopicForm {...this.state} { ...this.handleInput } />;
-            headerSet = {
-                rightIcon: 'fabu',
-                rightClick: this.submitTopic
-            };
         }
         return (
             <div>
-                <Header title="发表话题" {...headerSet} />
+                <Header mode={ isLogined ? 'topic-create-login' : 'topic-create-nologin'} handleClick={this.submitTopic} />
                 {main}
                 <Footer index="1" />
             </div>

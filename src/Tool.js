@@ -15,7 +15,7 @@ Tool.ajax = function (mySetting) {
         type: 'GET', //请求的方式
         data: {}, //发给服务器的数据
         dataType: 'json',
-        success: function (text) { }, //请求成功执行方法
+        success: function () { }, //请求成功执行方法
         error: function () { } //请求失败执行方法
     };
 

@@ -1,45 +1,56 @@
 import React, { Component  } from 'react';
 import { Link } from 'react-router';
+import { hashHistory } from 'react-router';
 
 /**
  * 公共头部
- *
- * @export
- * @class Header
- * @extends {Component}
  */
 class Header extends Component {
     render() {
-        let {title, leftTo, leftIcon, rightTo, rightIcon, rightClick } = this.props;
+        let { mode, handleClick, title=''} = this.props;
         let left = null;
-
-        if (leftTo && leftIcon) {
-            left = (
-                <Link to={leftTo}>
-                    <i className={'iconfont icon-' + leftIcon}></i>
-                </Link>
-            );
-        } else if (leftIcon === 'fanhui') { //返回上一页
-            left = (
-                <a onClick={this.context.router.goBack}>
-                    <i className={'iconfont icon-' + leftIcon}></i>
-                </a>
-            );
-        }
-
         let right = null;
-        if (rightTo && rightIcon) {
-            right = (
-                <Link to={rightTo}>
-                    <i className={'iconfont icon-' + rightIcon}></i>
-                </Link>
-            );
-        } else if (rightClick && rightIcon) {
-            right = (
-                <div onClick={rightClick}>
-                    <i className={'iconfont icon-' + rightIcon}></i>
-                </div>
-            );
+
+        switch (mode) {
+            case 'signin':
+                left = <Link onClick={hashHistory.goBack}><i className="iconfont icon-fanhui"></i></Link>;
+                title = '登录';
+
+                break;
+            case 'signout':
+                left = <Link onClick={hashHistory.goBack}><i className="iconfont icon-fanhui"></i></Link>;
+                title = '退出';
+
+                break;
+            case 'topic-create-nologin':
+                title = '发表话题';
+
+                break;
+            case 'topic-create-login':
+                title = '发表话题';
+                right = <Link onClick={handleClick}><i className="iconfont icon-fabu"></i></Link>;
+
+                break;
+            case 'mymessage':
+                title = '消息';
+
+                break;
+            case 'userview-loginuser':
+                /* 备注：title值为传入值 */
+                right = <Link to='signout'><i className="iconfont icon-tuichu"></i></Link>;
+
+                break;
+            case 'userview-normaluser':
+                /* 备注：title值为传入值 */
+                left = <Link onClick={hashHistory.goBack}><i className="iconfont icon-fanhui"></i></Link>;
+
+                break;
+            case 'topic':
+                title = '详情';
+                left = <Link onClick={hashHistory.goBack}><i className="iconfont icon-fanhui"></i></Link>;
+
+                break;
+            default:
         }
 
         return (
@@ -55,9 +66,5 @@ class Header extends Component {
         );
     }
 }
-
-Header.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};
 
 export default Header;

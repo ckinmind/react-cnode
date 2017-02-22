@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import loginActions from '../../actions/loginActions';
-
-import { Header } from '../common/index';
+import Header from '../common/Header';
 
 
 /**
@@ -15,7 +14,6 @@ class SignIn extends Component {
 
     /** 登录成功后再次访问登录页时跳转到个人中心）*/
     componentWillMount() {
-        console.log('componentWillMount');
         let { isLogined, loginname } = this.props.User;
         if (isLogined){
             hashHistory.push({ pathname: '/user/' + loginname });
@@ -24,7 +22,6 @@ class SignIn extends Component {
 
     /** 当登录成功，SignIn组件或接受到新的User数据，然后根据isLogined来决定跳转到个人中心还是清空输入框 */
     componentWillReceiveProps(nextProps){
-        console.log('componentWillReceiveProps');
         let { isLogined, loginname, onLogining } = nextProps.User;
         if(isLogined){
             /* 登录成功跳转 */
@@ -32,12 +29,8 @@ class SignIn extends Component {
         }else if(!onLogining){
             /** 这里if生效的条件是未登录且不处于登录状态*/
             this.tokenInput.value = '';
-            alert('登录失败');
+             alert('登录失败');
         }
-    }
-
-    componentWillUnmount(){
-        console.log('componentWillUnmount');
     }
 
     /** 处理登录的请求*/
@@ -47,12 +40,12 @@ class SignIn extends Component {
     }
 
     render() {
-        console.log('render');
+
         let { onLogining} = this.props.User;
         let loginText = onLogining ? '登陆中...' : '登录';
         return (
             <div>
-                <Header title="登录" leftIcon="fanhui" />
+                <Header mode="signin" />
                 <div className="signin" data-flex="dir:top main:center cross:center">
                     <div className="center">
                         <div className="text">

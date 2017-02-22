@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { DataLoad, Footer} from '../common/index';
-import Nav from './Nav';
-import ListItem from './ListItem';
 import indexActions from '../../actions/indexActions';
+import { DataLoad} from '../common/index';
+import Footer from '../common/Footer';
+import ListItem from './ListItem';
+import Nav from './Nav';
 
 
 /**
@@ -81,7 +82,6 @@ const mapStateToProps = state => ({
     List: state.List,
     User: state.User
 });
-
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(indexActions, dispatch)

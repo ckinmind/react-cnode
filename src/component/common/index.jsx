@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-// import { connect } from 'react-redux';
-// import action from '../../Action/Index';
-// import { Tool, merged } from '../../Tool';
-// import GetData from './GetData';
-// import GetNextPage from './GetNextPage';
-import Footer from './Footer';
-import Header from './Header';
 
-// export { GetData, GetNextPage }
-export { Footer, Header }
 /**
  * (加载动画)
  *

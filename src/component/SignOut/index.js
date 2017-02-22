@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import logoutActions from '../../actions/logoutActions';
 import { hashHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Header } from '../common/index';
+import Header from '../common/Header';
 
 /**
  * 退出登录页
@@ -30,7 +30,7 @@ class SignOut extends Component {
     render() {
         return (
             <div>
-                <Header title="退出" leftIcon="fanhui" />
+                <Header mode="signout"/>
                 <div className="signin" data-flex="dir:top main:center cross:center">
                     <div className="center">
                         <button className="btn btn-red" onClick={this.props.actions.logout}>确认退出登录？</button>

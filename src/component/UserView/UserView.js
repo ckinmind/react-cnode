@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { DataLoad, Header, Footer } from '../common/index';
-import Home from './Home.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import userViewActions from '../../actions/userViewActions';
+import Header from '../common/Header';
+import Footer from '../common/Footer';
+import { DataLoad } from '../common/index';
+import Home from './Home.js';
 
 /**
- *  个人中心
- *  todo: tab组件需要改写
+ *  个人中心页面
  */
 class UserView extends Component {
 
@@ -23,19 +24,22 @@ class UserView extends Component {
 
         let main = Object.keys(userview).length ? <Home data={userview} /> : <DataLoad />;
 
-        /* 顶部文字也不一样*/
-        let title = params.loginname == User.loginname ? '个人中心' : params.loginname + '的个人中心';
-
         /* 只有是登录用户的个人页面才会显示底部导航栏*/
         let footer = params.loginname == User.loginname ? <Footer index="3" /> : null;
 
-        /* 登录用户的个人中心的头部icon和普通用户的个人中心不一样*/
-        let leftIcon = params.loginname == User.loginname ? null : 'fanhui';
-        let rightIcon = params.loginname == User.loginname ? 'tuichu' : null;
+        let mode = '';
+        let title = '';
+        if(params.loginname == User.loginname){
+            mode = 'userview-loginuser';
+            title = '个人中心';
+        }else{
+            mode = 'userview-normaluser';
+            title = params.loginname + '的个人中心'
+        }
 
         return (
             <div>
-                <Header title={title} leftIcon={leftIcon} rightIcon={rightIcon} rightTo="/signout" />
+                <Header  mode={mode} title={title}/>
                 { main }
                 { footer }
             </div>

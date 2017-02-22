@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import messageAction from '../../actions/messageActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {DataLoad, Header, TipMsgSignin, Footer} from '../common/index';
+import {DataLoad, TipMsgSignin} from '../common/index';
 import MessageList from './MessageList';
+import Footer from '../common/Footer';
+import Header from '../common/Header';
 
 
 /**
@@ -42,7 +44,7 @@ class MyMessages extends Component {
 
         return (
             <div>
-                <Header title="消息"/>
+                <Header mode="mymessage"/>
                 {main}
                 <Footer index="2"/>
             </div>

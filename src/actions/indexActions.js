@@ -22,7 +22,7 @@ let indexActions = {
                 .then(json => {
                     if (json.success) {
                         /** 数据返回成功后的操作*/
-                        dispatch(indexActions.doneFetchingIndex(json, page));
+                        dispatch(indexActions.doneFetchingIndex(json, page, tab));
                     } else {
                         /** 数据返回失败后的操作*/
                         dispatch(indexActions.failFetchingIndex());
@@ -35,10 +35,11 @@ let indexActions = {
     beginFetchingIndex: ()=>({
         type: 'index/BEGIN_FETCHING_INDEX'
     }),
-    doneFetchingIndex: (json, page)=>({
+    doneFetchingIndex: (json, page, tab)=>({
         type: 'index/DONE_FETCHING_INDEX',
         data: json.data,
-        page: page
+        page: page,
+        tab: tab
     }),
     failFetchingIndex: ()=>({
         type: 'index/FAIL_FETCHING_INDEX'
