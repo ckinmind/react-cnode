@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import createTopicAction from '../../actions/createTopicAction';
 import { bindActionCreators } from 'redux';
 import {  Header, TipMsgSignin, Footer } from '../common/index';
-import NewTopic from './NewTopic';
+import TopicForm from './TopicForm';
 
 /**
  * 模块入口
@@ -47,7 +47,7 @@ class TopicCreate extends Component {
         if (!isLogined) {
             main = <TipMsgSignin />
         } else {
-            main = <NewTopic {...this.state} { ...this.handleInput } />
+            main = <TopicForm {...this.state} { ...this.handleInput } />;
             headerSet = {
                 rightIcon: 'fabu',
                 rightClick: this.submitTopic
@@ -63,10 +63,6 @@ class TopicCreate extends Component {
     }
 
 }
-
-TopicCreate.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
     User: state.User

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const NewTopic = ({tab, title, content, tabInput, titleInput, contentInput}) => (
-    <div className="topic-create">
+const TopicForm = ({tab, title, content, tabInput, titleInput, contentInput}) => (
+    <form className="topic-create">
         <div className="item">
             <select name="tab" defaultValue={tab} onInput={tabInput}>
                 <option value="">请选择发表类型</option>
@@ -16,13 +16,13 @@ const NewTopic = ({tab, title, content, tabInput, titleInput, contentInput}) => 
         <div className="item">
             <textarea defaultValue={content} onInput={contentInput} placeholder="内容字数 30 字以上"></textarea>
         </div>
-    </div>
+    </form>
 );
 
-NewTopic.propTypes = {
+TopicForm.propTypes = {
     tabInput: React.PropTypes.func.isRequired,      /* 监听用户选择发表类型*/
     titleInput: React.PropTypes.func.isRequired,    /* 监听用户输入标题 */
     contentInput: React.PropTypes.func.isRequired   /* 监听用户输入内容 */
 };
 
-export default NewTopic;
+export default TopicForm;
