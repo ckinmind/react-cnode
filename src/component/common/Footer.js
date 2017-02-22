@@ -16,10 +16,10 @@ const Footer = ({loginname, MessageCount}) => (
                 <i className="iconfont icon-fabu"></i>发表
             </Link>
 
-            <Link to="/my/messages" activeClassName="on">
+            <Link to="/messages" activeClassName="on">
                 <i className="iconfont icon-xiaoxi"></i>消息{ MessageCount > 0 ? <em>{ MessageCount }</em> : ''}
             </Link>
-            <Link to={ loginname ? '/user/' + loginname : 'siginin'} activeClassName="on">
+            <Link to={ loginname ? '/user/' + loginname : 'signin'} activeClassName="on">
                 <i className="iconfont icon-wode"></i>我的
             </Link>
         </ul>

@@ -5,7 +5,7 @@ import Timer from './component/common/Timer';
 import IndexList from './component/IndexList';            /* 首页组件 */
 import Topic from './component/Topic';                    /* 主题详情 */
 import TopicCreate from './component/TopicCreate';        /* 发布主题 */
-import MyMessages from './component/MyMessage/';          /* 我的消息 */
+import Messages from './component/Message/';          /* 我的消息 */
 import UserView from './component/UserView';              /* 我的个人中心 */
 import SignIn from './component/SignIn';                  /* 登录 */
 import SignOut from './component/SignOut';                /* 退出 */
@@ -38,7 +38,7 @@ const RouteConfig = (
             <IndexRoute component={IndexList} />
             <Route path="topic/create" component={TopicCreate} />
             <Route path="topic/:id" component={Topic} />
-            <Route path="my/messages" component={MyMessages} />
+            <Route path="messages" component={Messages} />
             <Route path="user/:loginname" component={UserView} />
             <Route path="signin" component={SignIn} />
             <Route path="signout" component={SignOut} />
