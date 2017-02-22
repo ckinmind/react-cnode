@@ -29,7 +29,7 @@ class SignIn extends Component {
         }else if(!onLogining){
             /** 这里if生效的条件是未登录且不处于登录状态*/
             this.tokenInput.value = '';
-             alert('登录失败');
+            // alert('登录失败');
         }
     }
 
