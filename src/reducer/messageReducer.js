@@ -6,6 +6,7 @@
 
 const messageInitState = {
     isFetching: false,
+    count: 0,
     data: {
 
      /*  返回数数据中data的大致结构
@@ -42,10 +43,18 @@ const Message = (state = messageInitState, action) => {
             return {...state, isFetching: true};
 
         case 'message/DONE_FETCHING_MESSAGE':      /* 成功加载数据 */
-            return { data: action.data, isFetching: false};
+            return {
+                isFetching: false,
+                count: state.count,
+                data: action.data,
+            };
 
         case 'message/FAIL_FETCHING_MESSAGE':      /* 加载数据失败 */
             return {...state, isFetching: false};
+
+        /* 处理未读消息数目 */
+        case 'message/DONE_GET_MESSAGE_COUNT':
+            return { ...state, count: action.count };
 
         default:
             return state;

@@ -4,11 +4,10 @@ import Topic from './topicReducer';
 import List from './listReducer';
 import Message from './messageReducer';
 import UserView from './userViewReducer';
-import MessageCount from './messageCountReducer';
 
 
 const rootReducer = combineReducers({
-    User, Topic, List, Message, UserView, MessageCount
+    User, Topic, List, Message, UserView
 });
 
 export default rootReducer
