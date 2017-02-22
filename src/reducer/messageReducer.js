@@ -5,7 +5,7 @@
  */
 
 const messageInitState = {
-
+    isFetching: false,
     data: {
 
      /*  返回数数据中data的大致结构
@@ -38,8 +38,14 @@ const messageInitState = {
 const Message = (state = messageInitState, action) => {
 
     switch (action.type) {
-        case 'message/DONE_FETCHING_MESSAGE':
-            return { data: action.data };
+        case 'message/BEGIN_FETCHING_MESSAGE':     /* 开始加载数据 */
+            return {...state, isFetching: true};
+
+        case 'message/DONE_FETCHING_MESSAGE':      /* 成功加载数据 */
+            return { data: action.data, isFetching: false};
+
+        case 'message/FAIL_FETCHING_MESSAGE':      /* 加载数据失败 */
+            return {...state, isFetching: false};
 
         default:
             return state;
