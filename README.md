@@ -1,5 +1,6 @@
 # react-cnode
 ![](https://raw.githubusercontent.com/ckinmind/react-cnode/master/src/styles/images/screenshot.gif)
+
 react构建的cnode社区, 在线访问：[https://ckinmind.github.io/react-cnode](https://ckinmind.github.io/react-cnode)
 
 ## 技术栈
