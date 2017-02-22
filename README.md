@@ -13,6 +13,7 @@
 - 原项目使用flex布局, 通过`data-`的方式来使样式生效, 这种巧妙的方式可以避免CSS样式污染的问题
 
 ## 版本更新(查看Branch / Tags)
+- **[v1.2]**:优化结构, 函数式组件, 设置定时器更新数据, 详细更新说明 [issue 19](https://github.com/ckinmind/react-cnode/issues/19)
 - **[v1.1]**:改写所有页面, 数据更新走action-reducer, 详细更新说明 [issue 1](https://github.com/ckinmind/react-cnode/issues/1)
 - **[v1.0]**:原始版本(基本同原项目)
 
@@ -25,6 +26,9 @@
 ```
 
 ## 问题收录
+- 关于componentWillReceiveProps的触发的问题(redux中) ,查看 [issue 22](https://github.com/ckinmind/react-cnode/issues/22)
+- 如何判断一个空对象, 查看 [issue 15](https://github.com/ckinmind/react-cnode/issues/15)
+- 关于设置定时器定时去获取数据,  查看 [issue 14](https://github.com/ckinmind/react-cnode/issues/14)
 - 关于在一个异步action中无法调用另一个异步action的问题(同步action可以), 查看 [issue 12](https://github.com/ckinmind/react-cnode/issues/12)
 - 关于在removeEventListener时候遇到的问题, 查看 [issue 11](https://github.com/ckinmind/react-cnode/issues/11)
 - 关于导航的高亮以及类似(/?tab=a)这样的链接高亮问题, 查看 [issue 9](https://github.com/ckinmind/react-cnode/issues/9)
