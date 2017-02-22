@@ -46,7 +46,7 @@ const Message = (state = messageInitState, action) => {
             return {
                 isFetching: false,
                 count: state.count,
-                data: action.data,
+                data: action.data
             };
 
         case 'message/FAIL_FETCHING_MESSAGE':      /* 加载数据失败 */

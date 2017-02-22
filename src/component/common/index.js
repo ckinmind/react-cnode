@@ -1,62 +1,32 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
+import {Link} from 'react-router';
 
-/**
- * (加载动画)
- */
-const DataLoad = ()=> (
-        <div className="data-load data-load-true">
-            <div className="msg">正在加载中</div>
-        </div>
+/** 加载动画*/
+const DataLoad = () => (
+    <div className="data-load data-load-true">
+        <div className="msg">正在加载中</div>
+    </div>
 );
 
-export { DataLoad };
-
-/**
- * 暂无记录
- *
- * @export
- * @class DataNull
- * @extends {Component}
- */
-export class DataNull extends Component {
-    render() {
-        return (
-            <div>暂无记录</div>
-        );
-    }
-}
+/** 暂无记录 */
+const DataNull = () => (
+    <div>暂无记录</div>
+);
 
 
-/**
- * 提示登录
- *
- * @export
- * @class TipMsgSignin
- * @extends {Component}
- */
-export class TipMsgSignin extends Component {
-    render() {
-        return (
-            <div className="tip-msg-signin">
-                你还未登录，请先<Link to="/signin">登录</Link>
-            </div>
-        );
-    }
-}
+/** 提示登录 */
+const TipMsgSignin = () => (
+    <div className="tip-msg-signin">
+        你还未登录，请先<Link to="/signin">登录</Link>
+    </div>
+);
 
-/**
- * 用户头像
- *
- * @export
- * @class UserHeadImg
- * @extends {Component}
- */
-export class UserHeadImg extends Component {
-    render() {
-        return (<div className="user-headimg" style={{ backgroundImage: 'url(' + this.props.url + ')' }}></div>)
-    }
-}
+
+/** 用户头像*/
+const UserHeadImg = ({url}) => (
+    <div className="user-headimg" style={{backgroundImage: `url(${url})`}}></div>
+);
+
 
 /**
  * 生成主题类型小图标
@@ -68,6 +38,8 @@ export class UserHeadImg extends Component {
  *
  *  优先显示top(指定)，good(精华)，其他tab
  */
-export const TabIcon = ({icon})=> (
+const TabIcon = ({icon}) => (
     <i className={'iconfont icon-' + (icon.top ? 'top' : ( icon.good ? 'good' : icon.tab))}></i>
 );
+
+export {DataLoad, DataNull, TipMsgSignin, UserHeadImg, TabIcon};
