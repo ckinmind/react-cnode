@@ -20,6 +20,13 @@ react构建的cnode社区, 在线访问：[https://ckinmind.github.io/react-cnod
 - **[v1.1]**:改写所有页面, 数据更新走action-reducer, 详细更新说明 [issue 1](https://github.com/ckinmind/react-cnode/issues/1)
 - **[v1.0]**:原始版本(基本同原项目)
 
+## 待解决问题
+- 数据本地缓存, 重复请求的问题
+- 页面返回时滚动条位置重置的问题
+- 登录组件初始化时componentWillReceiveProps也被调用的问题
+- 在router中做页面跳转权限判定的问题，避免在组件中判定
+- 回复时候markdown渲染的问题
+
 ## 如何开始
 ```js
 > git clone https://github.com/ckinmind/react-cnode.git
